@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-mctep",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "My personal eslint config",
   "main": "index.js",
   "scripts": {
