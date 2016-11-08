@@ -3,9 +3,13 @@ const eslintConfig = require('eslint/conf/eslint.json');
 const mctepConfig = require('..');
 const { Console } = require('console');
 const logger = new Console(process.stdout, process.stderr);
+const checkRules = require('../src/check-rules');
 
 try {
-	checkConfigs(eslintConfig, mctepConfig);
+	checkRules(
+		Object.keys(eslintConfig.rules),
+		Object.keys(mctepConfig.rules)
+	);
 } catch (error) {
 	logErrorRules('There are missing rules:', error.missing);
 	logErrorRules('There are deprecated rules:', error.deprecated);
@@ -19,26 +23,4 @@ function logErrorRules(title, rules) {
 			logger.error(` * ${rule}`);
 		});
 	}
-}
-
-function checkConfigs(eslint, custom) {
-	const eslintRuleNames = Object.keys(eslint.rules);
-	const customRuleNames = Object.keys(custom.rules);
-
-	const missing = eslintRuleNames.filter((name) => {
-		return !customRuleNames.includes(name);
-	});
-
-	const deprecated = customRuleNames.filter((name) => {
-		return !eslintRuleNames.includes(name);
-	});
-
-	if (missing.length || deprecated.length) {
-		const error = new Error('There are errors in eslint config');
-
-		Object.assign(error, { deprecated, missing });
-		throw error;
-	}
-
-	return null;
 }

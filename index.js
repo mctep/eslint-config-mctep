@@ -6,6 +6,10 @@ module.exports = {
 		node: true,
 	},
 
+	plugins: [
+		'import',
+	],
+
 	rules: {
 		'accessor-pairs': 'error',
 		'array-bracket-spacing': ['error', 'never'],
@@ -44,6 +48,9 @@ module.exports = {
 		'id-blacklist': 'error',
 		'id-length': ['error', { min: 3 }],
 		'id-match': 'error',
+
+		'import/no-unresolved': ['error', { commonjs: true }],
+
 		indent: ['error', 'tab', { SwitchCase: 1 }],
 		'init-declarations': 'error',
 		'jsx-quotes': 'error',
