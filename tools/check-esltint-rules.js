@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const { Console } = require('console');
 const importsPluginConfig = require('eslint-plugin-import');
-const eslintConfig = require('eslint/conf/eslint.json');
+const eslintConfig = require('eslint/conf/eslint-all');
 const mctepConfig = require('..');
 
 const logger = new Console(process.stdout, process.stderr);
@@ -33,9 +33,9 @@ function checkConfig(baseConfig, customConfig, pluginConfigs) {
 
 	Object.keys(pluginConfigs).forEach((plugin) => {
 		Object.keys(pluginConfigs[plugin].rules)
-		.forEach((rule) => {
-			baseRules.push(`${plugin}/${rule}`);
-		});
+			.forEach((rule) => {
+				baseRules.push(`${plugin}/${rule}`);
+			});
 	});
 
 	return checkRules(baseRules, customRules);
